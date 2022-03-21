@@ -27,6 +27,7 @@ npm start
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
+
 ## Project structure
 
 - `src/Routes` - Contains all  App routes
@@ -35,3 +36,7 @@ Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 - `src/Components` -  Contains all used components in the Application . 
 - `src/Assets` - Contains all the Assets like styles and icons
  
+## other sources 
+- All icons used in this project from Flat icon site [https://FLAticon.com](https://FLAticon.com).
+- use the udacity starter project  [https://github.com/udacity/reactnd-project-myreads-starter](https://github.com/udacity/reactnd-project-myreads-starter)
+- react router v6 docs [https://reactrouter.com/docs/en/v6/getting-started/overview]( https://reactrouter.com/docs/en/v6/getting-started/overview)
