@@ -4,7 +4,7 @@ import React, {Component} from "react";
 class BookActions extends Component {
       state = {
         book: this.props.book,
-        selectedAction: this.props.book.shelf,
+        selectedAction: this.props.book.shelf?this.props.book.shelf:'none',
       };
       
       handleChange = event => {

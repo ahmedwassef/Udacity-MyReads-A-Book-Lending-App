@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import Book from "../Components/Book";
 import BookShelf from "../Components/BookShelf";
 import { Link } from "react-router-dom";
 import { getAll, update } from '../Service/BooksAPI';
@@ -29,7 +28,7 @@ class BookList extends Component {
          * update  this.state.books curent array with the updated book
          * then update states with the updated books
          **/ 
-         let updatedBooks = this.state.books.map(b => b.id === book.id ? { ...b, shelf: shelf } : b);
+         let updatedBooks = this.state.books.map(item => item.id === book.id ? { ...item, shelf: shelf } : item);
        
         this.setState({
             books: updatedBooks,
@@ -43,6 +42,7 @@ class BookList extends Component {
                     <div className="list-books-title">
                         <h1>MyReads</h1>
                     </div>
+                    
                     <div className="list-books-content">
                         <BookShelf key='currentlyReading' title='Currently Reading' books={this.state.books.filter(book => book.shelf === 'currentlyReading')} loading={this.state.loading} updateBook={this.updateBook} />
                         <BookShelf key='wantToRead' title='Want to Read' books={this.state.books.filter(book => book.shelf === 'wantToRead')} loading={this.state.loading} updateBook={this.updateBook} />
