@@ -1,11 +1,11 @@
-import React, { Component } from "react";
+import React from "react";
 import Book from "./Book";
 import Loader from "./Loader";
 import NotFoundData from "./NotFoundData";
 
-class BookShelf extends Component {
-  render() {
-    const { books, title, loading, updateBook } = this.props;
+function BookShelf(props) {
+ 
+    const { books, title, loading, updateBook } = props;
     return (
       <div className="bookshelf">
         <h2 className="bookshelf-title">{title}</h2>
@@ -28,7 +28,7 @@ class BookShelf extends Component {
         )}
       </div>
     );
-  }
+  
 }
 
 export default BookShelf;

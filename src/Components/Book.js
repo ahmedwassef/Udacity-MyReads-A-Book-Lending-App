@@ -1,11 +1,11 @@
-import React, { Component } from "react";
+import React from "react";
 import BookActions from "./BookActions";
 import bookPlaceholder  from "../Assets/Images/book-placeholder.jpg";
 
-class Book extends Component {
+ 
+ function Book(props) {
 
-    render() {
-        const { book ,updateBook} = this.props;
+         const { book ,updateBook} =  props;
         return (
             <li >
                 <div className="book">
@@ -22,7 +22,6 @@ class Book extends Component {
                 </div>
             </li>
         );
-    }
-}
+ }
 
 export default Book;

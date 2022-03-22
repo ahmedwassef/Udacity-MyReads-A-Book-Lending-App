@@ -3,13 +3,15 @@ import { Link } from "react-router-dom";
 import Book from "../Components/Book";
 import Loader from "../Components/Loader";
 import NotFoundData from "../Components/NotFoundData";
-import { search, update } from '../Service/BooksAPI';
+import { search, update ,getAll } from '../Service/BooksAPI';
+ 
 class BookSearch extends Component {
    
     state = {
         query: '',
         loading: false,
         books: [],
+        searchBooks: [],
     };
 
     handleChange = event => {
@@ -21,22 +23,42 @@ class BookSearch extends Component {
             this.setState({ books: [], loading: false });
         }
     };
+
     updateBook = (book, shelf) => {
         /**
          * calling the update API function to update serverside database
          */
         update(book, shelf);
+        // update current book list from server after updates
+        this.retrieveBooks();
+    };
+
+    bookSearch = (query) => {
+        setTimeout(( ) => {
+            search(query).then(books => {
+                if (books.error) {
+                    this.setState({ searchBooks: [], loading: false }); 
+                    return ;
+                } else {
+                    const booksWithShelf = books.map((book) => {
+                        const bookShelf = this.state.books.find((b) => b.id === book.id);
+                        return { ...book, shelf: bookShelf ? bookShelf.shelf : 'none' };
+                      });
+                    this.setState({ searchBooks: booksWithShelf, loading: false });
+                }
+            });
+        }, 1000);
+      
 
     };
-    bookSearch = (query) => {
-        search(query).then(books => {
-            if (books.error) {
-                this.setState({ books: [], loading: false });
-            } else {
-                this.setState({ books: books, loading: false });
-            }
-        });
 
+    retrieveBooks(){
+        getAll().then(books => {
+            this.setState({ books: books, loading: false });
+        });
+    }
+    componentDidMount = () => {
+       this.retrieveBooks();
     };
 
     render() {
@@ -66,11 +88,11 @@ class BookSearch extends Component {
                             :
                             (
 
-                                this.state.books.length === 0 ? (
+                                this.state.searchBooks.length === 0 ? (
                                     <div>   <NotFoundData></NotFoundData> </div>
                                 ) : (
                                     <ol className="books-grid">
-                                        {this.state.books.map((book) => (
+                                        {this.state.searchBooks.map((book) => (
                                             <Book key={book.id} book={book} updateBook={this.updateBook} />
                                         ))}
                                     </ol>
